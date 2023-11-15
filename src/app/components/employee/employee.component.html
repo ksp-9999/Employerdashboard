@@ -97,8 +97,8 @@
             <div class="row mb-2">
                 <div class="col-md-6"><label for=""></label></div>
                 <div class="col-md-6 text-end">
-                    <button class="btn btn-danger mx-4 btn-sm">Cancel</button>
-                    <button  class="btn btn-primary btn-sm" [disabled]="form.invalid" (click)="onsave()">Save</button>
+                    <button class="btn btn-danger mx-4 btn-sm" (click)="resetForm()">Cancel</button>
+                    <button  class="btn btn-primary btn-sm" [disabled]="form.invalid" (click)="onsave(form)">Save</button>
                 </div>
             </div>
         </div>
@@ -140,19 +140,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let emp of employeeArr;index as i">
-                            <td>{{i+1}}</td>
-                            <td>{{emp.FirstName+emp.LastName}}</td>
-                            <td>{{emp.Technology}}</td>
-                            <td>{{emp.Designation}}</td>
-                            <td>{{emp.Skill}}</td>
-                            <td>{{emp.Core}}</td>
-                            <td>{{emp.Company}}</td>
-                            <td>
-                                <button class="btn btn-secondary ml-2" ><i class="bi-pencil-square"></i></button>
-                                <button class="btn btn-danger" ><i class="bi-trash-fill"></i></button>
-                            </td>
-                        </tr>
+                        <ng-container *ngIf="employeeArr.length!=0">
+                            <tr *ngFor="let emp of employeeArr;index as i">
+                                <td>{{i+1}}</td>
+                                <td>{{emp.FirstName+emp.LastName}}</td>
+                                <td>{{emp.Technology}}</td>
+                                <td>{{emp.Designation}}</td>
+                                <td>{{emp.Skill}}</td>
+                                <td>{{emp.Core}}</td>
+                                <td>{{emp.Company}}</td>
+                                <td>
+                                    <button class="btn btn-secondary ml-2" (click)="onEdit(emp)"><i class="bi-pencil-square"></i></button>
+                                    <button class="btn btn-danger" (click)="onDel(emp)"><i class="bi-trash-fill"></i></button>
+                                </td>
+                            </tr>
+                        </ng-container>
+                        <ng-container *ngIf="employeeArr.length==0">
+                            <tr>
+                                <td colspan='8' class="text-center">No record present</td>
+                            </tr>
+                        </ng-container>
                     </tbody>
                 </table>
             </div>

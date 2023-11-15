@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
-
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.css']
 })
-export class EmployeeComponent {
+export class EmployeeComponent implements OnInit{
 
+  @ViewChild('form') form!: NgForm;
   employeeobj:EmployeeObj;
   sortBy:string;
   searchText:string;
@@ -18,14 +19,70 @@ export class EmployeeComponent {
     this.searchText=''
     this.employeeArr=[]
 }
-
-onsave(){
-    this.employeeArr.push(this.employeeobj)
+ngOnInit(): void {
+  this.getAllEmployees()
+}
+onsave(form:any){
+    const isData= localStorage.getItem('EmpData')
+    if(isData==null)
+    {
+      const newArr=[]
+      this.employeeobj.EmployeeId=0
+      newArr.push(this.employeeobj)
+      localStorage.setItem("EmpData",JSON.stringify(newArr))
+      this.getAllEmployees()
+    } else{
+      const oldData=JSON.parse(isData)
+      const newId=oldData.length+1
+      this.employeeobj.EmployeeId=newId
+      oldData.push(this.employeeobj)
+      localStorage.setItem("EmpData",JSON.stringify(oldData))
+      this.getAllEmployees()
+    }
+      this.resetForm()
   }
+
+  getAllEmployees(){
+    const isData= localStorage.getItem('EmpData')
+    if(isData!=null){
+      const localData=JSON.parse(isData)
+      this.employeeArr=localData
+    }
+  }
+
+  resetForm() {
+  this.form.resetForm(); // Reset the form
+}
+
+onEdit(item: EmployeeObj){
+this.employeeobj=item
+}
+onDel(item: EmployeeObj){
+  debugger
+  const isData= localStorage.getItem('EmpData')
+    if(isData!=null){
+      const localData= JSON.parse(isData)
+      for (let index = 0; index < localData.length; index++) {
+        if(localData[index].EmployeeId==item.EmployeeId){
+          localData.splice(0,1)
+          this.getAllEmployees()
+          break
+        }
+      }
+      localStorage.setItem("EmpData",JSON.stringify(localData))
+      this.getAllEmployees()
+    }
+}
+
+
+
+
+
 
 }
 
 export class EmployeeObj{
+  EmployeeId:number
   FirstName:string;
   LastName:string;
   Technology:string;
@@ -37,6 +94,7 @@ export class EmployeeObj{
   Company:string;
   FewDetails:string;
   constructor(){
+    this.EmployeeId=0
     this.FirstName=''
     this.LastName=''
     this.Technology=''
