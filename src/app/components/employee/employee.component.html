@@ -113,15 +113,18 @@
                 <div class="col-md-3">
                     <select name="" id="" class="form-control" [(ngModel)]="sortBy">
                         <option value="" selected><i class="bi-funnel-fill"></i>Sort by</option>
-                        <option value=""></option>
-                        <option value="">Angular</option>
-                        <option value="">java</option>
+                        <option value="">Name</option>
+                        <option value="">Technology</option>
+                        <option value="">Designation</option>
+                        <option value="">Skill</option>
+                        <option value="">Core Enterprise</option>
+                        <option value="">Company</option>
                     </select>
                 </div>
                 <div class="col-md-3">
                     <div class="input-group">
                         <label for="" class="input-group-text"><i class="bi-search"></i></label>
-                        <input type="text" class="form-control" [(ngModel)]="searchText" placeholder="serach">
+                        <input type="text" class="form-control" [(ngModel)]="searchText" placeholder="serach" (ngModelChange)="onSearch()">
                     </div>
                 </div>
             </div>
