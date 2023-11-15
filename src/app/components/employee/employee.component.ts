@@ -27,7 +27,7 @@ onsave(form:any){
     if(isData==null)
     {
       const newArr=[]
-      this.employeeobj.EmployeeId=0
+      this.employeeobj.EmployeeId=1
       newArr.push(this.employeeobj)
       localStorage.setItem("EmpData",JSON.stringify(newArr))
       this.getAllEmployees()
@@ -58,24 +58,44 @@ onEdit(item: EmployeeObj){
 this.employeeobj=item
 }
 onDel(item: EmployeeObj){
-  debugger
   const isData= localStorage.getItem('EmpData')
     if(isData!=null){
-      const localData= JSON.parse(isData)
-      for (let index = 0; index < localData.length; index++) {
-        if(localData[index].EmployeeId==item.EmployeeId){
-          localData.splice(0,1)
-          this.getAllEmployees()
-          break
-        }
-      }
+      let localData= JSON.parse(isData)
+      localData=localData.filter((emp:any)=>{return emp.EmployeeId!=item.EmployeeId})
       localStorage.setItem("EmpData",JSON.stringify(localData))
       this.getAllEmployees()
     }
 }
 
 onSearch(){
-  
+  const isData= localStorage.getItem('EmpData')
+    if(isData!=null){
+      const localData=JSON.parse(isData)
+      if(this.sortBy=='Name'){
+        const filteredData=localData.filter((m:any)=>{ return (m.FirstName+m.LastName).includes(this.searchText)})
+        this.employeeArr=filteredData
+      }
+      if(this.sortBy=='Technology'){
+        const filteredData=localData.filter((m:any)=>{ return m.Technology.includes(this.searchText)})
+        this.employeeArr=filteredData
+      }
+      if(this.sortBy=='Designation'){
+        const filteredData=localData.filter((m:any)=>{ return m.Designation.includes(this.searchText)})
+        this.employeeArr=filteredData
+      }
+      if(this.sortBy=='Skill'){
+        const filteredData=localData.filter((m:any)=>{ return m.Skill.includes(this.searchText)})
+        this.employeeArr=filteredData
+      }
+      if(this.sortBy=='Core Enterprise'){
+        const filteredData=localData.filter((m:any)=>{ return m.Core.includes(this.searchText)})
+        this.employeeArr=filteredData
+      }
+      if(this.sortBy=='Company'){
+        const filteredData=localData.filter((m:any)=>{ return m.Company.includes(this.searchText)})
+        this.employeeArr=filteredData
+      }
+    }
 }
 
 
@@ -110,5 +130,5 @@ export class EmployeeObj{
     this.FewDetails=''
   }
 
- 
+
 }

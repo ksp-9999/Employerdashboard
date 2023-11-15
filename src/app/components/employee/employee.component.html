@@ -9,7 +9,7 @@
                     <label for="">Name</label>
                 </div>
                 <div class="col-md-4">
-                    <input type="text" class="form-control" [(ngModel)]="employeeobj.FirstName" required minlength="8" maxlength="15" name="Fname" ngModel #Fname="ngModel">
+                    <input type="text" class="form-control" [(ngModel)]="employeeobj.FirstName" required   name="Fname" ngModel #Fname="ngModel">
                     <!-- <div class="errormsg" *ngIf="Fname.valid">FirstName is compulsory</div> -->
                     <div class="errormsg" *ngIf="Fname.touched&&Fname.errors?.['required']">Enter your Firstname</div>
                     <div class="errormsg" *ngIf="Fname.errors?.['minlength']||Fname.errors?.['maxlength']">LastName should between 8-15
@@ -17,7 +17,7 @@
                     
                 </div>
                 <div class="col-md-4">
-                    <input type="text" class="form-control" [(ngModel)]="employeeobj.LastName" required minlength="8" maxlength="15" ngModel #Lname="ngModel" name="Lname">
+                    <input type="text" class="form-control" [(ngModel)]="employeeobj.LastName" required   ngModel #Lname="ngModel" name="Lname">
                     <!-- <div class="errormsg" *ngIf="Lname.touched&&Lname.value==''">LastName is compulsory</div> -->
                     <div class="errormsg" *ngIf="Lname.touched&&Lname.errors?.['required']">Enter your Lastname</div>
                     <div class="errormsg" *ngIf="Lname.errors?.['minlength']||Lname.errors?.['maxlength']">LastName should between 8-15
@@ -111,15 +111,19 @@
             <div class="row">
                 <div class="col-md-6"></div>
                 <div class="col-md-3">
-                    <select name="" id="" class="form-control" [(ngModel)]="sortBy">
-                        <option value="" selected><i class="bi-funnel-fill"></i>Sort by</option>
-                        <option value="">Name</option>
-                        <option value="">Technology</option>
-                        <option value="">Designation</option>
-                        <option value="">Skill</option>
-                        <option value="">Core Enterprise</option>
-                        <option value="">Company</option>
-                    </select>
+                    <div class="input-group">
+                        <div class="input-group-text"><i class="bi-filter"></i></div>
+                        <select name="sortBy" id="sortBy" class="form-control" [(ngModel)]="sortBy">
+                            <option value="" selected>Filter by</option>
+                            <option value="Name">Name</option>
+                            <option value="Technology">Technology</option>
+                            <option value="Designation">Designation</option>
+                            <option value="Skill">Skill</option>
+                            <option value="Core Enterprise">Core Enterprise</option>
+                            <option value="Company">Company</option>
+                        </select>
+                    </div>
+                    
                 </div>
                 <div class="col-md-3">
                     <div class="input-group">
