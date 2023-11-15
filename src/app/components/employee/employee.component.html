@@ -1,0 +1,161 @@
+<div class="row">
+    <!-- Employee Form -->
+    <div class="col-md-4">
+        <h3>Employee Details Entry Form</h3>
+        <form action="" #form="ngForm" name="form">
+        <div class="outerDiv">
+            <div class="row mb-2">
+                <div class="col-md-4">
+                    <label for="">Name</label>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" [(ngModel)]="employeeobj.FirstName" required minlength="8" maxlength="15" name="Fname" ngModel #Fname="ngModel">
+                    <!-- <div class="errormsg" *ngIf="Fname.valid">FirstName is compulsory</div> -->
+                    <div class="errormsg" *ngIf="Fname.touched&&Fname.errors?.['required']">Enter your Firstname</div>
+                    <div class="errormsg" *ngIf="Fname.errors?.['minlength']||Fname.errors?.['maxlength']">LastName should between 8-15
+                        characters</div>
+                    
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" [(ngModel)]="employeeobj.LastName" required minlength="8" maxlength="15" ngModel #Lname="ngModel" name="Lname">
+                    <!-- <div class="errormsg" *ngIf="Lname.touched&&Lname.value==''">LastName is compulsory</div> -->
+                    <div class="errormsg" *ngIf="Lname.touched&&Lname.errors?.['required']">Enter your Lastname</div>
+                    <div class="errormsg" *ngIf="Lname.errors?.['minlength']||Lname.errors?.['maxlength']">LastName should between 8-15
+                        characters</div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-4"><label for="">Technology</label></div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" [(ngModel)]="employeeobj.Technology" required ngModel #tech="ngModel" name="tech">
+                    <!-- <div class="errormsg" *ngIf="tech.touched&&tech.value==''">Technology is compulsory</div> -->
+                    <div class="errormsg" *ngIf="tech.touched&&tech.errors?.['required']">Enter your Technology</div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-4"><label for="">Designation</label></div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" [(ngModel)]="employeeobj.Designation" required ngModel #desg="ngModel" name="desg">
+                    <!-- <div class="errormsg" *ngIf="desg.touched&&desg.value==''">Designation is compulsory</div> -->
+                    <div class="errormsg" *ngIf="desg.touched&&desg.errors?.['required']">Enter your Designation</div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-4"><label for="">Skills</label></div>
+                <div class="col-md-4">
+                    <select  id="skills" class="form-control" [(ngModel)]="employeeobj.Skill" required ngModel #skills="ngModel" name="skills">
+                        <option value="" selected>Select</option>
+                        <option value="Dotnet">Dot net</option>
+                        <option value="Angular">Angular</option>
+                        <option value="Java">Java</option>
+                    </select>
+                    <div class="errormsg" *ngIf="skills.touched&&skills.errors?.['required']">Select your skills</div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-4"><label for="">Core Expertise</label></div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" [(ngModel)]="employeeobj.Core" required ngModel #core="ngModel" name="core">
+                    <!-- <div class="errormsg" *ngIf="core.touched&&core.value==''">Core Expertise is compulsory</div> -->
+                    <div class="errormsg" *ngIf="core.touched&&core.errors?.['required']">Enter your Core Expertise</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4"><label for="">Certifications if any</label></div>
+                <div class="col-md-4">
+                    <input type="radio" name="IsCertification" id="" value="no" [(ngModel)]="employeeobj.IsCertification" >
+                    <label for=""> No</label> &nbsp;
+                    <input type="radio" name="IsCertification" id="" value="yes" [(ngModel)]="employeeobj.IsCertification">
+                    <label for=""> yes</label>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-4"><label for=""></label></div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" [(ngModel)]="employeeobj.CertificationName" required ngModel #certf="ngModel" name="certf">
+                    <!-- <div class="errormsg" *ngIf="certf.touched&&certf.value==''">CertificationName is compulsory</div> -->
+                    <div class="errormsg" *ngIf="certf.touched&&certf.errors?.['required']">Enter your CertificationName</div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-4"><label for="">Company</label></div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" [(ngModel)]="employeeobj.Company" required ngModel #compName="ngModel" name="compName">
+                    <!-- <div class="errormsg" *ngIf="compName.touched&&compName.value==''">CertificationName is compulsory</div> -->
+                    <div class="errormsg" *ngIf="compName.touched&&compName.errors?.['required']">Enter your CertificationName</div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <!-- <div class="col-md-4"><label for="">Few lines about company</label></div> -->
+                <label for="">Few lines about company</label>
+                <div class="col-md-12">
+                    <textarea name="aboutComp" id="" cols="60" rows="7" class="form-control" [(ngModel)]="employeeobj.FewDetails" required ngModel #aboutComp="ngModel"></textarea>
+                    <!-- <div class="errormsg" *ngIf="aboutComp.touched&&aboutComp.value==''">CertificationName is compulsory</div> -->
+                    <div class="errormsg" *ngIf="aboutComp.touched&&aboutComp.errors?.['required']">Enter your CertificationName</div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-6"><label for=""></label></div>
+                <div class="col-md-6 text-end">
+                    <button class="btn btn-danger mx-4 btn-sm">Cancel</button>
+                    <button  class="btn btn-primary btn-sm" [disabled]="form.invalid" (click)="onsave()">Save</button>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+    <!-- Employee List -->
+    <div class="col-md-8">
+        <h3>Employee List</h3>
+        <div class="outerDiv">
+            <div class="row">
+                <div class="col-md-6"></div>
+                <div class="col-md-3">
+                    <select name="" id="" class="form-control" [(ngModel)]="sortBy">
+                        <option value="" selected><i class="bi-funnel-fill"></i>Sort by</option>
+                        <option value=""></option>
+                        <option value="">Angular</option>
+                        <option value="">java</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <label for="" class="input-group-text"><i class="bi-search"></i></label>
+                        <input type="text" class="form-control" [(ngModel)]="searchText" placeholder="serach">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <table class="table table-bordered mt-3">
+                    <thead>
+                        <tr>
+                            <th>S no</th>
+                            <th>Name</th>
+                            <th>Technology</th>
+                            <th>Designation</th>
+                            <th>Skill</th>
+                            <th>Core Expertise</th>
+                            <th>Company</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let emp of employeeArr;index as i">
+                            <td>{{i+1}}</td>
+                            <td>{{emp.FirstName+emp.LastName}}</td>
+                            <td>{{emp.Technology}}</td>
+                            <td>{{emp.Designation}}</td>
+                            <td>{{emp.Skill}}</td>
+                            <td>{{emp.Core}}</td>
+                            <td>{{emp.Company}}</td>
+                            <td>
+                                <button class="btn btn-secondary ml-2" ><i class="bi-pencil-square"></i></button>
+                                <button class="btn btn-danger" ><i class="bi-trash-fill"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
