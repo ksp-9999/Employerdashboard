@@ -63,16 +63,16 @@
             <div class="row">
                 <div class="col-md-4"><label for="">Certifications if any</label></div>
                 <div class="col-md-4">
-                    <input type="radio" name="IsCertification" id="" value="no" [(ngModel)]="employeeobj.IsCertification" >
-                    <label for=""> No</label> &nbsp;
-                    <input type="radio" name="IsCertification" id="" value="yes" [(ngModel)]="employeeobj.IsCertification">
-                    <label for=""> yes</label>
+                    <input type="radio" name="IsCertification" id="no" value="no" [(ngModel)]="employeeobj.IsCertification" >
+                    <label for="no"> No</label> &nbsp;
+                    <input type="radio" name="IsCertification" id="yes" value="yes" [(ngModel)]="employeeobj.IsCertification">
+                    <label for="yes"> yes</label>
                 </div>
             </div>
             <div class="row mb-2">
                 <div class="col-md-4"><label for=""></label></div>
                 <div class="col-md-8">
-                    <input type="text" class="form-control" [(ngModel)]="employeeobj.CertificationName" required ngModel #certf="ngModel" name="certf">
+                    <input type="text" [disabled]="!(employeeobj.IsCertification=='yes')" class="form-control" [(ngModel)]="employeeobj.CertificationName" required ngModel #certf="ngModel" name="certf">
                     <!-- <div class="errormsg" *ngIf="certf.touched&&certf.value==''">CertificationName is compulsory</div> -->
                     <div class="errormsg" *ngIf="certf.touched&&certf.errors?.['required']">Enter your CertificationName</div>
                 </div>
@@ -128,7 +128,7 @@
                 <div class="col-md-3">
                     <div class="input-group">
                         <label for="" class="input-group-text"><i class="bi-search"></i></label>
-                        <input type="text" class="form-control" [(ngModel)]="searchText" placeholder="serach" (ngModelChange)="onSearch()">
+                        <input type="text" class="form-control" [(ngModel)]="searchText" placeholder="search" (ngModelChange)="onSearch()">
                     </div>
                 </div>
             </div>
